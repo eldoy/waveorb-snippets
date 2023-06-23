@@ -63,21 +63,34 @@
   "Map function": {
     "prefix": "map",
     "body": [
-      "${ $1.map(function($2) {",
-      "  return /* HTML */`$3`",
-      "}).join('') }"
+      "${$1",
+      "  .map(function($2) {",
+      "    return /* HTML */`$3`",
+      "  })",
+      "  .join('')}"
     ],
     "description": "Create an array map"
   },
   "Raw variable": {
     "prefix": "r",
-    "body": ["${ $1 }"],
+    "body": ["${$1}"],
     "description": "Insert raw variable"
   },
   "Escaped variable": {
     "prefix": "e",
-    "body": ["${ esc($1) }"],
+    "body": ["${esc($1)}"],
     "description": "Insert escaped variable"
+  },
+  "Template if statement": {
+    "prefix": "i",
+    "body": [
+      "${(function () {",
+      "  if ($1) {",
+      "    return /* HTML */ `$2`",
+      "  }",
+      "  return /* HTML */`$3`",
+      "})()}"
+    ]
   }
 }
 
